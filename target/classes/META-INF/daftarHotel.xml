@@ -1,0 +1,19 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="daftarHotel">
+
+    <!-- Meminta List Hotel -->
+    <resultMap id="getListHotel" type="com.hotel.database.model.Hotel">
+        <result property="name" column="name"/>
+        <result property="kota" column="kota"/>
+        <result property="kamar" column="kamar"/>
+        <result property="terpakai" column="terpakai"/>
+        <result property="tersedia" column="tersedia"/>
+        <result property="harga" column="harga"/>
+    </resultMap>
+    <select id="getAllHotelList" resultMap="getListHotel">
+        SELECT * FROM listhotel;
+    </select>
+</mapper>

@@ -1,0 +1,30 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="daftarHotel">
+
+    <!-- Meminta List Hotel -->
+    <resultMap id="getListHotel" type="com.hotel.database.model.Hotel">
+        <result property="name" column="name"/>
+        <result property="kota" column="kota"/>
+        <result property="kamar" column="kamar"/>
+        <result property="terpakai" column="terpakai"/>
+        <result property="tersedia" column="tersedia"/>
+        <result property="harga" column="harga"/>
+    </resultMap>
+    <select id="getAllHotelList" resultMap="getListHotel">
+        SELECT * FROM listhotel;
+    </select>
+
+    <!-- Melakukan Input Pesanan ke DB Pesanan -->
+    <insert id="insertOrder" parameterType="com.hotel.database.model.OrderHotel">
+        INSERT INTO pesanan (username, hotel, durasi, tanggalpesanan) VALUE (#{username}, #{hotel}, #{durasi}, #{tanggalpesanan});
+    </insert>
+
+    <!-- Melakukan Update Database Hotel -->
+    <update id="updateHotelList" parameterType="com.hotel.database.model.Hotel">
+        UPDATE listhotel SET terpakai=#{terpakai} AND tersedia=#{tersedia};
+    </update>
+
+</mapper>
