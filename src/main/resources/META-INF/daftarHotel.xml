@@ -18,11 +18,11 @@
     </select>
 
     <!-- Pencarian Username di DB Pesanan -->
-    <resultMap id="getUsernamePesanan" type="com.hotel.database.model.Hotel">
-        <result property="username" column="username"/>
+    <resultMap id="getHotelByName" type="com.hotel.database.model.Hotel">
+        <result property="name" column="name"/>
     </resultMap>
-    <select id="getUsernameFromPesanan" resultMap="getUsernamePesanan">
-        SELECT * FROM pesanan WHERE username=#{username}
+    <select id="searchHotelName" resultMap="getHotelByName">
+        SELECT * FROM listhotel WHERE name=#{name}
     </select>
 
     <!-- Melakukan Input Pesanan ke DB Pesanan -->
@@ -36,8 +36,8 @@
     </update>
 
     <!-- Melakukan Update Database Hotel -->
-    <update id="updateHotelList" parameterType="com.hotel.database.model.Hotel">
-        UPDATE listhotel SET terpakai=#{terpakai} AND tersedia=#{tersedia};
+    <update id="updateHotel" parameterType="com.hotel.database.model.Hotel">
+        UPDATE listhotel SET terpakai=#{terpakai}, tersedia=#{tersedia} WHERE name=#{name};
     </update>
 
 </mapper>

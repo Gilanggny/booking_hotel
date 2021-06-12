@@ -39,16 +39,33 @@ public class hotelRepository {
         System.out.println("Memulai Proses Pengambilan Data User ....");
         connectMyBatis();
         try{
-
-
                 orderHotel.calculateFinalDate();
                 orderHotel.calculatePrice();
 
                 session.insert("daftarHotel.insertOrder", orderHotel);
 
-//                session.update("daftarHotel.updatePesanan", orderHotel.getUsername());
+                Hotel findHotel = session.selectOne("daftarHotel.searchHotelName", orderHotel.getHotel());
 
-//                OrderHotel orderResponse = session.selectOne("daftarHotel.getUsernameFromPesanan", orderHotel);
+                System.out.println(
+                        "Nama Hotel : " + findHotel.getName() +
+                        "\nKapasitas Hotel : " + findHotel.getKamar() +
+                        "\nKamar Kosong : " + findHotel.getTersedia() +
+                        "\nKamar Terisi : " + findHotel.getTerpakai()
+                );
+                findHotel.getTerpakai();
+                findHotel.getTersedia();
+                findHotel.kurangiTersedia();
+                findHotel.tambahTerpakai();
+
+                System.out.println("Update");
+                System.out.println(
+                        "Nama Hotel : " + findHotel.getName() +
+                                "\nKapasitas Hotel : " + findHotel.getKamar() +
+                                "\nKamar Kosong : " + findHotel.getTersedia() +
+                                "\nKamar Terisi : " + findHotel.getTerpakai()
+                );
+
+                session.update("daftarHotel.updateHotel", findHotel);
 
                 sendMessage.sendOrderResponseToRestController(orderHotel);
 
