@@ -1,0 +1,49 @@
+body {
+    /* background-color: aqua; */
+    padding: 0;
+    margin: 0;
+    font-family: Inter;
+    background-color: #DEE9F3;
+}
+
+.hero-title {
+    font-size: 30px;
+}
+
+.hero-content {
+    width: 100%;
+    height: 100%;
+    margin-top: 96px;
+    margin-left: 119px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+
+/* Typography */
+
+.hero-paragraph {
+    font-family: Poppins;
+    font-style: medium;
+    font-size: 14px;
+    line-height: 21px;
+    line-height: 100%;
+    text-align: left;
+    vertical-align: top;
+}
+
+.hero-caption {
+    font-style: italic;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 160%;
+    letter-spacing: 0.01em;
+    color: #606C84;
+}
+
+.data {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
