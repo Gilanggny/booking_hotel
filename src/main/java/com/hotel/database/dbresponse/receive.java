@@ -1,5 +1,7 @@
 package com.hotel.database.dbresponse;
 
+import com.google.gson.Gson;
+import com.hotel.database.model.OrderHotel;
 import com.hotel.database.repository.hotelRepository;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
@@ -7,6 +9,7 @@ import com.rabbitmq.client.ConnectionFactory;
 import com.rabbitmq.client.DeliverCallback;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.concurrent.TimeoutException;
 
 public class receive {
@@ -52,19 +55,22 @@ public class receive {
         try{
             connectRabbit();
             ch = con.createChannel();
-            ch.queueDeclare("requestDataHotel", false, false, false, null);
+            ch.queueDeclare("orderDataHotel", false, false, false, null);
 
             DeliverCallback deliverCallback = (consumerTag, delivery) -> {
+                String message = new String(delivery.getBody(), StandardCharsets.UTF_8);
+
+                OrderHotel newOrder = new Gson().fromJson(message, OrderHotel.class);
 
                 System.out.println(" [x] Received Message From RabbitMQ");
                 try{
-//                    HotelRep.requestListHotel();
-                    
+                    HotelRep.orderHotel(newOrder);
+
                 } catch(Exception e){
                     e.printStackTrace();
                 }
             };
-            ch.basicConsume("requestDataHotel", true, deliverCallback, consumerTag -> { });
+            ch.basicConsume("orderDataHotel", true, deliverCallback, consumerTag -> { });
         } catch (Exception e){
             e.printStackTrace();
             e.printStackTrace();

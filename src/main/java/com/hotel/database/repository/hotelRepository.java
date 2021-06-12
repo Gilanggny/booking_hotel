@@ -2,6 +2,7 @@ package com.hotel.database.repository;
 
 import com.hotel.database.dbresponse.send;
 import com.hotel.database.model.Hotel;
+import com.hotel.database.model.OrderHotel;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -28,9 +29,30 @@ public class hotelRepository {
         try{
             List<Hotel> dataHotel = session.selectList("daftarHotel.getAllHotelList");
             session.commit();
-//            sendMessage.sendListUserToRestController(dataUser);
             sendMessage.sendListUserToRestController(dataHotel);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 
+    public void orderHotel(OrderHotel orderHotel) throws IOException, TimeoutException {
+        System.out.println("Memulai Proses Pengambilan Data User ....");
+        connectMyBatis();
+        try{
+
+
+                orderHotel.calculateFinalDate();
+                orderHotel.calculatePrice();
+
+                session.insert("daftarHotel.insertOrder", orderHotel);
+
+//                session.update("daftarHotel.updatePesanan", orderHotel.getUsername());
+
+//                OrderHotel orderResponse = session.selectOne("daftarHotel.getUsernameFromPesanan", orderHotel);
+
+                sendMessage.sendOrderResponseToRestController(orderHotel);
+
+                session.commit();
         }catch (Exception e){
             e.printStackTrace();
         }

@@ -17,10 +17,23 @@
         SELECT * FROM listhotel;
     </select>
 
+    <!-- Pencarian Username di DB Pesanan -->
+    <resultMap id="getUsernamePesanan" type="com.hotel.database.model.Hotel">
+        <result property="username" column="username"/>
+    </resultMap>
+    <select id="getUsernameFromPesanan" resultMap="getUsernamePesanan">
+        SELECT * FROM pesanan WHERE username=#{username}
+    </select>
+
     <!-- Melakukan Input Pesanan ke DB Pesanan -->
     <insert id="insertOrder" parameterType="com.hotel.database.model.OrderHotel">
-        INSERT INTO pesanan (username, hotel, durasi, tanggalpesanan) VALUE (#{username}, #{hotel}, #{durasi}, #{tanggalpesanan});
+        INSERT INTO pesanan (username, hotel, durasi, tanggalpesanan, tanggalakhir, tarif) VALUE (#{username}, #{hotel}, #{durasi}, #{tanggalpesan}, #{tanggalakhir}, #{tarif});
     </insert>
+
+    <!-- Melakukan Update Tarif dan Tanggal ke DB Pesanan -->
+    <update id="updatePesanan" parameterType="com.hotel.database.model.OrderHotel">
+        UPDATE pesanan SET tanggalakhir=#{tanggalakhir} AND tarif=#{tarif} WHERE username=#{username);
+    </update>
 
     <!-- Melakukan Update Database Hotel -->
     <update id="updateHotelList" parameterType="com.hotel.database.model.Hotel">

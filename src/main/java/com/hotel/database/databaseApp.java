@@ -7,6 +7,7 @@ public class databaseApp {
         receive terima = new receive();
         try{
             terima.requestLisData();
+            terima.orderHotel();
         }catch(Exception e){
             e.printStackTrace();
         }

@@ -2,6 +2,7 @@ package com.hotel.database.dbresponse;
 
 import com.google.gson.Gson;
 import com.hotel.database.model.Hotel;
+import com.hotel.database.model.OrderHotel;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
@@ -28,6 +29,33 @@ public class send {
             channel.basicPublish(
                     "",
                     "hotelListFromDB",
+                    null,
+                    ListJSON.getBytes(StandardCharsets.UTF_8)
+            );
+
+            System.out.println("Sent Hotel List To Rabbit MQ");
+
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    // Send Order Data Response To RestAPI
+    public void sendOrderResponseToRestController(OrderHotel orderHotel){
+        connectionFactory = new ConnectionFactory();
+        connectionFactory.setHost("localhost");
+
+        try (
+                Connection con = connectionFactory.newConnection();
+                Channel channel = con.createChannel();
+        ) {
+            channel.queueDeclare("receiveOrderResponseFromDB", false, false, false, null);
+
+            String ListJSON = new Gson().toJson(orderHotel);
+
+            channel.basicPublish(
+                    "",
+                    "receiveOrderResponseFromDB",
                     null,
                     ListJSON.getBytes(StandardCharsets.UTF_8)
             );
