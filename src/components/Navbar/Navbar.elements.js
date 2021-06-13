@@ -51,7 +51,6 @@ display: none;
     }
 `;
 
-
 export const NavMenu = styled.ul`
     display: flex;
     align-items: center;

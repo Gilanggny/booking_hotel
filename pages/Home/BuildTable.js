@@ -29,6 +29,9 @@ class BuildTable extends Component {
       }, {
         Header: 'Kamar Tersedia',
         accessor: "tersedia"
+      }, {
+        Header: 'Harga Kamar',
+        accessor: "harga"
       }
     ], []
     )
