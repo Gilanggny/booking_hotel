@@ -17,12 +17,20 @@
         SELECT * FROM listhotel;
     </select>
 
-    <!-- Pencarian Username di DB Pesanan -->
+    <!-- Pencarian nama hotel di DB Hotel -->
     <resultMap id="getHotelByName" type="com.hotel.database.model.Hotel">
         <result property="name" column="name"/>
     </resultMap>
     <select id="searchHotelName" resultMap="getHotelByName">
         SELECT * FROM listhotel WHERE name=#{name}
+    </select>
+
+    <!-- Pencarian username di DB Hotel -->
+    <resultMap id="getUsernameInOrderList" type="com.hotel.database.model.OrderHotel">
+        <result property="username" column="username" />
+    </resultMap>
+    <select id="searchUsernameInOrderList" resultMap="getUsernameInOrderList">
+        SELECT * FROM pesanan WHERE username=#{username};
     </select>
 
     <!-- Melakukan Input Pesanan ke DB Pesanan -->

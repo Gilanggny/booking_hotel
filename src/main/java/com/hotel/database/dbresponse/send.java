@@ -41,7 +41,7 @@ public class send {
     }
 
     // Send Order Data Response To RestAPI
-    public void sendOrderResponseToRestController(OrderHotel orderHotel){
+    public void sendOrderResponseToRestController(String inputMessage){
         connectionFactory = new ConnectionFactory();
         connectionFactory.setHost("localhost");
 
@@ -51,13 +51,13 @@ public class send {
         ) {
             channel.queueDeclare("receiveOrderResponseFromDB", false, false, false, null);
 
-            String ListJSON = new Gson().toJson(orderHotel);
+//            String ListJSON = new Gson().toJson(orderHotel);
 
             channel.basicPublish(
                     "",
                     "receiveOrderResponseFromDB",
                     null,
-                    ListJSON.getBytes(StandardCharsets.UTF_8)
+                    inputMessage.getBytes(StandardCharsets.UTF_8)
             );
 
             System.out.println("Sent Hotel List To Rabbit MQ");

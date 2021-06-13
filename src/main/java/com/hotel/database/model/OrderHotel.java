@@ -46,23 +46,15 @@ public class OrderHotel {
     public int getTanggalpesan(){return tanggalpesan;}
     public int getTanggalAkhir(){return tanggalakhir;}
     public Double getTarif(){return tarif;}
+    public boolean getStatus(){return lunas;}
 
     // Calculate
     public void calculateFinalDate(){
         int finalDate = getDurasi() + getTanggalpesan();
         this.tanggalakhir = finalDate;
     }
-    public void calculatePrice(){
-        if (getHotel().equals("Hotel Cempaka")){
-            Double price = 1500000.0;
-            this.tarif = Double.parseDouble(String.valueOf(getDurasi())) * price;
-        }else if (getHotel().equals("Hotel Mawar")){
-            Double price = 1250000.0;
-            this.tarif = Double.parseDouble(String.valueOf(getDurasi())) * price;
-        }else{
-            Double price = 1750000.0;
-            this.tarif = Double.parseDouble(String.valueOf(getDurasi())) * price;
-        }
+    public void calculatePrice(Double inputPrice){
+        this.tarif = Double.parseDouble(String.valueOf(getDurasi())) * inputPrice;
     }
     public void changeStatusLunas(){
         this.lunas = true;
