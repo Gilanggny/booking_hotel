@@ -1,0 +1,92 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+/** Table Styles */
+table {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+  
+table td, table th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+  
+table tr:nth-child(even){
+    background-color: #f2f2f2;
+}
+  
+table tr:hover {
+    background-color: #00e0e0;
+}
+  
+table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #04AA6D;
+    color: white;
+}
+
+
+/** Pagination */
+.pagination {
+    padding-left: 30%;
+    padding-right: 30%;
+}
+
+.pagination ul {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    background: #fff;
+    padding: 8px;
+    border-radius: 50px;
+}
+
+.pagination ul li.firstPage,
+.pagination ul li.nextButton,
+.pagination ul li.previousButton,
+.pagination ul li.lastPage {
+    color: black;
+    list-style: none;
+    line-height: 45px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 500;
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.3s ease;
+    margin-right: 15px;
+    margin-left: 15px;
+}
+
+.pagination ul li.pageInfo,
+.pagination ul li.searchPage {
+    color: black;
+    list-style: none;
+    line-height: 45px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 500;
+    margin-right: 15px;
+    margin-left: 15px;
+}
+
+.pagination ul li.firstPage,
+.pagination ul li.nextButton,
+.pagination ul li.previousButton,
+.pagination ul li.lastPage {
+    padding: 0 20px;
+    border-radius: 50px;
+  }
+
+.pagination ul li.active,
+.pagination ul li.previousButton:hover,
+.pagination ul li.nextButton:hover,
+.pagination ul li:first-child:hover,
+.pagination ul li:last-child:hover {
+    color: #fff;
+    background: #04AA6D;
+}
+

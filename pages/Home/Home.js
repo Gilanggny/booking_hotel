@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import BuildTable from './BuildTable'
+import './Home.css'
 
 class Home extends Component {
     render(){
