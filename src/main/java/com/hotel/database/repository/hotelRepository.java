@@ -5,6 +5,8 @@ import com.hotel.database.dbresponse.send;
 import com.hotel.database.model.Hotel;
 import com.hotel.database.model.Message;
 import com.hotel.database.model.OrderHotel;
+import com.hotel.database.model.User;
+import com.hotel.database.util.checkRegex;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -18,6 +20,7 @@ import java.util.concurrent.TimeoutException;
 public class hotelRepository {
     private SqlSession session;
     private send sendMessage = new send();
+    private checkRegex RegexChecking = new checkRegex();
 
     public void connectMyBatis() throws IOException {
         Reader reader = Resources.getResourceAsReader("SqlMapConfig.xml");
@@ -81,6 +84,54 @@ public class hotelRepository {
                 String sendJSON = new Gson().toJson(inputMessage);
                 sendMessage.sendOrderResponseToRestController(sendJSON);
             }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void registerUser(User newUser) throws IOException, TimeoutException {
+        System.out.println("Memulai Proses Pengambilan Data User ....");
+        connectMyBatis();
+        try{
+            User checkUser = session.selectOne("daftarHotel.searchUsernameFromUserDB", newUser.getUsername());
+            if(checkUser==null){
+                if(RegexChecking.checkUsernameRegex(newUser)){
+                    if(RegexChecking.checkPasswordRegex(newUser)){
+                        session.insert("daftarHotel.insertUser", newUser);
+                        session.commit();
+                        Message inputMessage = new Message("Berhasil Mendaftar");
+                        String sendJSON = new Gson().toJson(inputMessage);
+                        sendMessage.sendRegisterResponseToRestController(sendJSON);
+                    } else {
+                        Message inputMessage = new Message("Password Tidak Sesuai dengan Regex");
+                        String sendJSON = new Gson().toJson(inputMessage);
+                        sendMessage.sendRegisterResponseToRestController(sendJSON);
+                    }
+                } else {
+                    Message inputMessage = new Message("Username Tidak Sesuai dengan Regex");
+                    String sendJSON = new Gson().toJson(inputMessage);
+                    sendMessage.sendRegisterResponseToRestController(sendJSON);
+                }
+            } else {
+                Message inputMessage = new Message("Username sudah terdaftar");
+                String sendJSON = new Gson().toJson(inputMessage);
+                sendMessage.sendRegisterResponseToRestController(sendJSON);
+            }
+        }catch (NullPointerException e){
+            System.out.println("User Tidak ditemukan");
+        }
+    }
+
+    public void loginUser(User newUser) throws IOException, TimeoutException {
+        System.out.println("Memulai Proses Pengambilan Data User ....");
+        connectMyBatis();
+        try{
+            User loginUser = session.selectOne("daftarHotel.searchUsernameFromUserDB", newUser.getUsername());
+            loginUser.changeStatus();
+            session.update("daftarHotel.updateUserStatus", loginUser);
+            session.commit();
+            String sendJSON = new Gson().toJson(loginUser);
+            sendMessage.sendLoginResponseToRestController(sendJSON);
         }catch (Exception e){
             e.printStackTrace();
         }

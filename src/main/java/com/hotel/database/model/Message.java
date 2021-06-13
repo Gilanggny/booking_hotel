@@ -10,7 +10,7 @@ public class Message {
     public void setMessage(String input){
         this.message = input;
     }
-    
+
     public String getMessage(){
         return message;
     }

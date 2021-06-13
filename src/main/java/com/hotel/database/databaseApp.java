@@ -8,6 +8,8 @@ public class databaseApp {
         try{
             terima.requestLisData();
             terima.orderHotel();
+            terima.registerUser();
+            terima.loginUser();
         }catch(Exception e){
             e.printStackTrace();
         }

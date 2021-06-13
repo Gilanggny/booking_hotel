@@ -1,8 +1,7 @@
 package com.hotel.restapi.controller;
 
 
-import com.hotel.restapi.model.Hotel;
-import com.hotel.restapi.model.OrderHotel;
+import com.hotel.restapi.model.*;
 import com.hotel.restapi.response.receive;
 import com.hotel.restapi.response.send;
 import org.slf4j.Logger;
@@ -40,11 +39,31 @@ public class RestApiController {
 
     @RequestMapping(value = "/order", method = RequestMethod.POST)
     public ResponseEntity<?> orderHotel(@RequestBody OrderHotel RequestHotel) throws SQLException, IOException, TimeoutException {
-        logger.info("Sending information of new user : {}", RequestHotel);
+        logger.info("Sending information of new order : {}", RequestHotel);
         sendOrder.orderHotel(RequestHotel);
         return new ResponseEntity<>(receiveInfo.receiveOrderRespondFromDB(), HttpStatus.CREATED);
     }
 
+    //------------------------------------------------------------------------------------------------------
+    //                                              REGISTER USER
+    //------------------------------------------------------------------------------------------------------
 
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    public ResponseEntity<?> registerUser(@RequestBody User newUser) throws SQLException, IOException, TimeoutException {
+        logger.info("Sending information of new user : {}", newUser);
+        sendOrder.registerUser(newUser);
+        return new ResponseEntity<>(receiveInfo.receiveRegisterUserRespondFromDB(), HttpStatus.CREATED);
+    }
+
+    //------------------------------------------------------------------------------------------------------
+    //                                                LOGIN USER
+    //------------------------------------------------------------------------------------------------------
+
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public ResponseEntity<?> loginUser(@RequestBody User loginUser) throws SQLException, IOException, TimeoutException {
+        logger.info("Sending information of new user : {}", loginUser);
+        sendOrder.loginUser(loginUser);
+        return new ResponseEntity<>(receiveInfo.receiveLoginUserRespondFromDB(), HttpStatus.CREATED);
+    }
 
 }

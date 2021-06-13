@@ -1,8 +1,7 @@
 package com.hotel.restapi.response;
 
 import com.google.gson.Gson;
-import com.hotel.restapi.model.Hotel;
-import com.hotel.restapi.model.OrderHotel;
+import com.hotel.restapi.model.*;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
@@ -48,4 +47,42 @@ public class send {
             e.printStackTrace();
         }
     }
+
+    // Send Order to Input Data To Register To Database APP
+    public void registerUser(User newUser) throws IOException, TimeoutException {
+        ConnectionFactory conFac = new ConnectionFactory();
+        conFac.setHost("localhost");
+        Connection con = conFac.newConnection();
+        Channel channel = con.createChannel();
+
+        String message = new Gson().toJson(newUser);
+
+        try{
+            channel.queueDeclare("registerUserHotel", false, false, false, null);
+            channel.basicPublish("", "registerUserHotel", null, message.getBytes(StandardCharsets.UTF_8));
+            System.out.println("[x] Sending Register User to RabbitMQ");
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    // Send Order to Input Data To Register To Database APP
+    public void loginUser(User loginUser) throws IOException, TimeoutException {
+        ConnectionFactory conFac = new ConnectionFactory();
+        conFac.setHost("localhost");
+        Connection con = conFac.newConnection();
+        Channel channel = con.createChannel();
+
+        String message = new Gson().toJson(loginUser);
+
+        try{
+            channel.queueDeclare("loginUserHotel", false, false, false, null);
+            channel.basicPublish("", "loginUserHotel", null, message.getBytes(StandardCharsets.UTF_8));
+            System.out.println("[x] Sending Register User to RabbitMQ");
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+
 }

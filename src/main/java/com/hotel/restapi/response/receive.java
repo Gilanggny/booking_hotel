@@ -45,4 +45,40 @@ public class receive {
 
         return message;
     }
+
+    public String receiveRegisterUserRespondFromDB() throws IOException, TimeoutException {
+        ConnectionFactory conFac = new ConnectionFactory();
+        conFac.setHost("localhost");
+        Connection con = conFac.newConnection();
+        Channel ch = con.createChannel();
+
+        ch.queueDeclare("receiveRegisterResponseFromDB", false, false, false, null);
+
+        GetResponse getResponse;
+        do { getResponse = ch.basicGet("receiveRegisterResponseFromDB", true); } while (getResponse==null);
+
+        String message = new String(getResponse.getBody(), "UTF-8");
+
+        System.out.println(" [x] Received Order Response Data From Database via RabbitMQ");
+
+        return message;
+    }
+
+    public String receiveLoginUserRespondFromDB() throws IOException, TimeoutException {
+        ConnectionFactory conFac = new ConnectionFactory();
+        conFac.setHost("localhost");
+        Connection con = conFac.newConnection();
+        Channel ch = con.createChannel();
+
+        ch.queueDeclare("receiveLoginResponseFromDB", false, false, false, null);
+
+        GetResponse getResponse;
+        do { getResponse = ch.basicGet("receiveLoginResponseFromDB", true); } while (getResponse==null);
+
+        String message = new String(getResponse.getBody(), "UTF-8");
+
+        System.out.println(" [x] Received Order Response Data From Database via RabbitMQ");
+
+        return message;
+    }
 }

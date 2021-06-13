@@ -25,13 +25,26 @@
         SELECT * FROM listhotel WHERE name=#{name}
     </select>
 
-    <!-- Pencarian username di DB Hotel -->
-    <resultMap id="getUsernameInOrderList" type="com.hotel.database.model.OrderHotel">
+    <!-- Pencarian username di DB USer -->
+    <resultMap id="getUsernameFromUserDB" type="com.hotel.database.model.User">
         <result property="username" column="username" />
     </resultMap>
-    <select id="searchUsernameInOrderList" resultMap="getUsernameInOrderList">
-        SELECT * FROM pesanan WHERE username=#{username};
+    <select id="searchUsernameFromUserDB" resultMap="getUsernameFromUserDB">
+        SELECT * FROM user WHERE username=#{username};
     </select>
+
+    <!-- Pencarian name di DB User -->
+    <resultMap id="getNameFromUserDB" type="com.hotel.database.model.User">
+        <result property="name" column="name" />
+    </resultMap>
+    <select id="searchNameFromUserDB" resultMap="getNameFromUserDB">
+        SELECT * FROM user WHERE name=#{name};
+    </select>
+
+    <!-- Melakukan Input User Baru -->
+    <insert id="insertUser" parameterType="com.hotel.database.model.User">
+        INSERT INTO user (name, phone, address, username, email, password, status) VALUE (#{name}, #{phone}, #{address}, #{username}, #{email}, #{password}, #{status});
+    </insert>
 
     <!-- Melakukan Input Pesanan ke DB Pesanan -->
     <insert id="insertOrder" parameterType="com.hotel.database.model.OrderHotel">
@@ -46,6 +59,11 @@
     <!-- Melakukan Update Database Hotel -->
     <update id="updateHotel" parameterType="com.hotel.database.model.Hotel">
         UPDATE listhotel SET terpakai=#{terpakai}, tersedia=#{tersedia} WHERE name=#{name};
+    </update>
+
+    <!-- Melakukan Update User DB untuk Status -->
+    <update id="updateUserStatus" parameterType="com.hotel.database.model.User">
+        UPDATE user SET status=#{status};
     </update>
 
 </mapper>

@@ -50,17 +50,59 @@ public class send {
                 Channel channel = con.createChannel();
         ) {
             channel.queueDeclare("receiveOrderResponseFromDB", false, false, false, null);
-
-//            String ListJSON = new Gson().toJson(orderHotel);
-
             channel.basicPublish(
                     "",
                     "receiveOrderResponseFromDB",
                     null,
                     inputMessage.getBytes(StandardCharsets.UTF_8)
             );
+            System.out.println("Sent Order Respond To Rabbit MQ");
 
-            System.out.println("Sent Hotel List To Rabbit MQ");
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    // Send Register Data Response To RestAPI
+    public void sendRegisterResponseToRestController(String inputMessage){
+        connectionFactory = new ConnectionFactory();
+        connectionFactory.setHost("localhost");
+
+        try (
+                Connection con = connectionFactory.newConnection();
+                Channel channel = con.createChannel();
+        ) {
+            channel.queueDeclare("receiveRegisterResponseFromDB", false, false, false, null);
+            channel.basicPublish(
+                    "",
+                    "receiveRegisterResponseFromDB",
+                    null,
+                    inputMessage.getBytes(StandardCharsets.UTF_8)
+            );
+            System.out.println("Sent Order Respond To Rabbit MQ");
+
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    // Send Register Data Response To RestAPI
+    public void sendLoginResponseToRestController(String inputMessage){
+        connectionFactory = new ConnectionFactory();
+        connectionFactory.setHost("localhost");
+
+        try (
+                Connection con = connectionFactory.newConnection();
+                Channel channel = con.createChannel();
+        ) {
+            channel.queueDeclare("receiveLoginResponseFromDB", false, false, false, null);
+            channel.basicPublish(
+                    "",
+                    "receiveLoginResponseFromDB",
+                    null,
+                    inputMessage.getBytes(StandardCharsets.UTF_8)
+            );
+            System.out.println("Sent Order Respond To Rabbit MQ");
 
         } catch(Exception e){
             e.printStackTrace();
