@@ -20,7 +20,6 @@ const Navbar = () => {
     const handleClick = () => setClick(!click);
 
     return (
-        <>
         <IconContext.Provider value={{color: '#fff'}}>
             <Nav>
                 <NavbarContainer>
@@ -41,7 +40,6 @@ const Navbar = () => {
                 </NavbarContainer>
             </Nav>
         </IconContext.Provider>
-    </>
     )
 }
 

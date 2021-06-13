@@ -52,7 +52,7 @@ display: none;
 `;
 
 
-export const NavMenu = syled.ul`
+export const NavMenu = styled.ul`
     display: flex;
     align-items: center;
     list-style: none;

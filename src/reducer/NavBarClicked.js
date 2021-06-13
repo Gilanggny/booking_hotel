@@ -1,5 +1,5 @@
 const initialState = {
-    clicked=false
+    clicked: false
 }
 
 const NavigationBarReducer =(state = initialState, action)=>{
