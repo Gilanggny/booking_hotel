@@ -3,7 +3,7 @@ const initialState = {
     error: ""
 }
 
-const RegisterReducer =(state=initialState, action)=>{
+const RegisterReducer = (state=initialState, action)=>{
     switch(action.type){
         case "FETCH_DATA_REGISTER":
             return{

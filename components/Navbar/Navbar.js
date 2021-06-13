@@ -5,7 +5,12 @@ import './Navbar.css'
 import { Link } from 'react-router-dom';
 
 class Navbar extends Component {
-    state = { clicked: false }
+    constructor(props){
+        super(props);
+        this.state={
+            clicked: false
+        }
+    }
 
     handleClick = () => {
         this.setState({ clicked: !this.state.clicked })
@@ -13,7 +18,6 @@ class Navbar extends Component {
 
     render() {
         return(
-            
             <nav className="NavbarItems">
                 <h1 className="navbar-logo"><img src={require('../../assets/images/logo 1.png')} alt='logo' /></h1>
                 <div className="menu-icon" onClick={this.handleClick}>

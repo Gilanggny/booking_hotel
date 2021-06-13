@@ -54,62 +54,9 @@ const Home = () => {
       col5:'Jakarta'
     },
   ]
+  
   const [filter, setFilter] = useState("")
   const [data, setData] = useState(initialData)
-  // const data = React.useMemo(
-  //   () => [
-  //     {
-  //       col1: '1',
-  //       col2: 'Severus',
-  //       col3: 'Laki-laki',
-  //       col4: '20',
-  //       col5:'Jakarta'
-  //     },
-  //     {
-  //       col1: '1',
-  //       col2: 'Severus',
-  //       col3: 'Laki-laki',
-  //       col4: '20',
-  //       col5:'Jakarta'
-  //     },
-  //     {
-  //       col1: '1',
-  //       col2: 'Severus',
-  //       col3: 'Laki-laki',
-  //       col4: '20',
-  //       col5:'Jakarta'
-  //     },
-  //     {
-  //       col1: '1',
-  //       col2: 'Severus',
-  //       col3: 'Laki-laki',
-  //       col4: '20',
-  //       col5:'Jakarta'
-  //     },
-  //     {
-  //       col1: '1',
-  //       col2: 'Severus',
-  //       col3: 'Laki-laki',
-  //       col4: '20',
-  //       col5:'Jakarta'
-  //     },
-  //     {
-  //       col1: '1',
-  //       col2: 'Severus',
-  //       col3: 'Laki-laki',
-  //       col4: '20',
-  //       col5:'Jakarta'
-  //     },
-  //     {
-  //       col1: '1',
-  //       col2: 'Severus',
-  //       col3: 'Laki-laki',
-  //       col4: '20',
-  //       col5:'Jakarta'
-  //     },
-  //   ],
-  //   []
-  // )
 
   const columns = React.useMemo(
     () => [
@@ -151,7 +98,6 @@ const Home = () => {
     // let filterResult = initialData
     // if(filter)
     const filterResult = initialData.filter(res => res.col2.toLowerCase().includes(filter.toLowerCase()))
-    
       setData(filterResult)
   }, [filter])
 
@@ -205,7 +151,6 @@ const Home = () => {
     </div>
   )
 };
-
 
 export default Home;
   // return (
