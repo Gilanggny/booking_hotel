@@ -1,18 +1,20 @@
-import React from 'react';
+import React, { Component } from 'react'
 
-const Services = () => {
-  return (
-    <div
-      style={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        height: '90vh'
-      }}
-    >
-      <h1>Services</h1>
-    </div>
-  );
-};
+class Services extends Component {
+  render(){
+    return (
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: '90vh'
+        }}
+      >
+        <h1>Services</h1>
+      </div>
+    )
+  }
+}
 
 export default Services;

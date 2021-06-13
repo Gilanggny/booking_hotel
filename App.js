@@ -2,10 +2,10 @@ import React from 'react';
 import Navbar from "./components/Navbar/Navbar";
 import './App.css';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import Home from './pages/Home/Home';
 import Services from './pages/Services/Services';
 import Product from './pages/Product/Product';
 import ContactUs from './pages/ContactUs/ContactUs';
+import Home from './pages/Home/Home';
 
 function App() {
   return (
