@@ -42,7 +42,7 @@ class Login extends Component {
         this.fetchDataLogin("/login", "post", loginUser)
     }
 
-    fetchDataLogin = (url, inputMethod, data) => {
+    fetchDataLogin = (url, inputMethod, dataToObj) => {
         try{
             const option = {
                 method: inputMethod,
