@@ -8,6 +8,7 @@ public class User {
     private String email;
     private String password;
     private boolean status = false;
+    private String avatar = "https://cdn1.iconfinder.com/data/icons/mix-color-4/502/Untitled-1-512.png";
 
     public void setName(String input){
         this.name = input;
@@ -23,6 +24,7 @@ public class User {
         this.password = input;
     }
     public void setUsername(String input){this.username = input;}
+    public void setAvatar(String input){this.avatar = input;}
 
     public String getName(){return name;}
     public String getPhone(){return phone;}
@@ -31,6 +33,7 @@ public class User {
     public String getPassword(){return password;}
     public String getUsername(){return username;}
     public boolean getStatus(){return status;}
+    public String getAvatar(){return avatar;}
 
     public void changeStatus(){
         if(status==true){

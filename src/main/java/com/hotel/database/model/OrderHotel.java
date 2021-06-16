@@ -3,6 +3,7 @@ package com.hotel.database.model;
 public class OrderHotel {
     private long id;
     private String username;
+    private String phone;
     private String hotel;
     private int durasi;
     private int tanggalpesan;
@@ -37,6 +38,7 @@ public class OrderHotel {
     public void setTanggalpesan(int input) {
         this.tanggalpesan = input;
     }
+    public void setPhone(String input){this.phone = input;}
 
     // Getter
     public long getId(){return id;}
@@ -47,6 +49,7 @@ public class OrderHotel {
     public int getTanggalAkhir(){return tanggalakhir;}
     public Double getTarif(){return tarif;}
     public boolean getStatus(){return lunas;}
+    public String getPhone(){return phone;}
 
     // Calculate
     public void calculateFinalDate(){

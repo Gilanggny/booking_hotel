@@ -8,6 +8,8 @@ public class Hotel {
     private int terpakai;
     private int tersedia;
     private Double harga;
+    private String imglink;
+
 
     Hotel(){}
 
@@ -44,6 +46,7 @@ public class Hotel {
     public void setHarga(Double harga){
         this.harga = harga;
     }
+    public void setImage(String input){this.imglink = input;}
 
     // Getter
     public long getId(){return id;}
@@ -53,6 +56,7 @@ public class Hotel {
     public int getTerpakai(){return terpakai;}
     public int getTersedia(){return tersedia;}
     public Double getHarga(){return harga;}
+    public String getImageLink(){return imglink;}
 
     // Change Value
     public void tambahTerpakai(){

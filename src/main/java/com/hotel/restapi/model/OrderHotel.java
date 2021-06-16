@@ -3,6 +3,7 @@ package com.hotel.restapi.model;
 public class OrderHotel {
     private long id;
     private String username;
+    private String phone;
     private String hotel;
     private int durasi;
     private int tanggalpesan;
@@ -36,6 +37,7 @@ public class OrderHotel {
     public void setTanggalpesan(int input) {
         this.tanggalpesan = input;
     }
+    public void setPhone(String input){this.phone = input;}
 
     // Getter
     public long getId(){return id;}
@@ -45,23 +47,15 @@ public class OrderHotel {
     public int getTanggalpesan(){return tanggalpesan;}
     public int getTanggalAkhir(){return tanggalakhir;}
     public Double getTarif(){return tarif;}
+    public String getPhone(){return phone;}
 
     // Calculate
     public void calculateFinalDate(){
         int finalDate = getDurasi() + getTanggalpesan();
         this.tanggalakhir = finalDate;
     }
-    public void calculatePrice(){
-        if (getHotel().equals("Hotel Cempaka")){
-            Double price = 1500000.0;
-            this.tarif = Double.parseDouble(String.valueOf(getDurasi())) * price;
-        }else if (getHotel().equals("Hotel Mawar")){
-            Double price = 1250000.0;
-            this.tarif = Double.parseDouble(String.valueOf(getDurasi())) * price;
-        }else{
-            Double price = 1750000.0;
-            this.tarif = Double.parseDouble(String.valueOf(getDurasi())) * price;
-        }
+    public void calculatePrice(Double inputPrice){
+        this.tarif = Double.parseDouble(String.valueOf(getDurasi())) * inputPrice;
     }
 
 }

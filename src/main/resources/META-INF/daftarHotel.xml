@@ -12,6 +12,7 @@
         <result property="terpakai" column="terpakai"/>
         <result property="tersedia" column="tersedia"/>
         <result property="harga" column="harga"/>
+        <result property="imglink" column="url" />
     </resultMap>
     <select id="getAllHotelList" resultMap="getListHotel">
         SELECT * FROM listhotel;
@@ -43,12 +44,12 @@
 
     <!-- Melakukan Input User Baru -->
     <insert id="insertUser" parameterType="com.hotel.database.model.User">
-        INSERT INTO user (name, phone, address, username, email, password, status) VALUE (#{name}, #{phone}, #{address}, #{username}, #{email}, #{password}, #{status});
+        INSERT INTO user (name, phone, address, username, email, password, avatar, status) VALUE (#{name}, #{phone}, #{address}, #{username}, #{email}, #{password}, #{avatar}, #{status});
     </insert>
 
     <!-- Melakukan Input Pesanan ke DB Pesanan -->
     <insert id="insertOrder" parameterType="com.hotel.database.model.OrderHotel">
-        INSERT INTO pesanan (username, hotel, durasi, tanggalpesanan, tanggalakhir, tarif) VALUE (#{username}, #{hotel}, #{durasi}, #{tanggalpesan}, #{tanggalakhir}, #{tarif});
+        INSERT INTO pesanan (username, phone, hotel, durasi, tanggalpesanan, tanggalakhir, tarif) VALUE (#{username}, #{phone}, #{hotel}, #{durasi}, #{tanggalpesan}, #{tanggalakhir}, #{tarif});
     </insert>
 
     <!-- Melakukan Update Tarif dan Tanggal ke DB Pesanan -->
@@ -63,7 +64,7 @@
 
     <!-- Melakukan Update User DB untuk Status -->
     <update id="updateUserStatus" parameterType="com.hotel.database.model.User">
-        UPDATE user SET status=#{status};
+        UPDATE user SET status=#{status} WHERE username=#{username};
     </update>
 
 </mapper>
